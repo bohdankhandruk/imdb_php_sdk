@@ -1,0 +1,29 @@
+{
+    "name": "bohdankhandruk/imdb_php_sdk",
+    "description": "IMDB PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bohdan Khandruk",
+            "email": "bkhandruk@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Imdb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "league/uri": "^6.4",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+}
