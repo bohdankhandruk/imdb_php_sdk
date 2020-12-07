@@ -23,6 +23,10 @@ abstract class ImdbItem
     }
 
     public function retrieveData($string, $endpoint, $idOption) {
+        if (!$string) {
+            throw new \Exception('The string to retrieve data on is not provided or invalid.');
+        }
+
         if (!preg_match('/^(?>nm|tt)\d+$/', $string)) {
             $string = $this->fetcher->suggestId($string);
         }
