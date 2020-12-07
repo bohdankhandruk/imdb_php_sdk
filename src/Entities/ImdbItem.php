@@ -30,7 +30,10 @@ abstract class ImdbItem
         if (!preg_match('/^(?>nm|tt)\d+$/', $string)) {
             $string = $this->fetcher->suggestId($string);
         }
-        $this->data = $this->fetcher->fetch($endpoint, [$idOption => $string]);
+
+        if (!$this->data = $this->fetcher->fetch($endpoint, [$idOption => $string])) {
+            throw new \Exception('The IMDB item data is not retrieved due to empty response.');
+        }
     }
 
     public function getPureId() {
