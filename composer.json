@@ -21,7 +21,7 @@
     },
     "require": {
         "league/uri": "^6.4",
-        "guzzlehttp/guzzle": "^7.2"
+        "guzzlehttp/guzzle": "^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
