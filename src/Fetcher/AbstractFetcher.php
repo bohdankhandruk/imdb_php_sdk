@@ -16,6 +16,16 @@ abstract class AbstractFetcher
         $this->httpClient = $clientFactory->createClient();
     }
 
-    abstract public function fetch($endpoint, $options);
+    public function fetch($endpoint, $options)
+    {
+        $response = $this->httpClient->sendRequest($endpoint, $options);
+
+        if ($response) {
+            return $this->parser->parse($response->getBody()->getContents());
+        }
+
+        return FALSE;
+    }
+
     abstract public function suggestId($string);
 }

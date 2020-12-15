@@ -4,16 +4,6 @@ namespace Imdb\Fetcher;
 
 class BaseFetcher extends AbstractFetcher
 {
-    public function fetch($endpoint, $options)
-    {
-        $response = $this->httpClient->sendRequest($endpoint, $options);
-
-        if ($response) {
-            return $this->parser->parse($response->getBody()->getContents());
-        }
-
-        return FALSE;
-    }
 
     public function suggestId($string)
     {
