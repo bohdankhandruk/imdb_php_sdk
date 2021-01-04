@@ -10,41 +10,53 @@ abstract class AbstractFetcher
 {
     protected $parser;
     protected $httpClient;
-    protected $cacheClient;
 
-    public function __construct(ParserInterface $parser, ClientFactoryInterface $clientFactory, CacheClientFactory $cacheClientFactory = NULL)
+    protected $cacheClient;
+    protected $cacheConfig;
+
+    public function __construct(ParserInterface $parser, ClientFactoryInterface $clientFactory, CacheClientFactory $cacheClientFactory = NULL, array $cacheConfig = [])
     {
         $this->parser = $parser;
         $this->httpClient = $clientFactory->createClient();
+
         $this->cacheClient = $cacheClientFactory->create();
+        $this->cacheConfig = $cacheConfig;
     }
 
-    public function fetch($endpoint, $options, $cacheConfig = [])
+    public function fetch($endpoint, $options)
     {
-        if ($this->cacheClient && $cacheConfig) {
+        $data = FALSE;
+
+        if ($this->cacheClient && $this->cacheConfig) {
             // @todo move this to concrete cache client.
-            list('host' => $host, 'port' => $port, 'timeout' => $timeout, 'interval' => $interval) = $cacheConfig;
+            list('host' => $host, 'port' => $port, 'timeout' => $timeout, 'interval' => $interval) = $this->cacheConfig;
 
             $this->cacheClient->connect($host, $port, $timeout, $interval);
 
             $cacheKey = $endpoint . ':' . json_encode($options);
 
-            if (!$response = $this->cacheClient->get($cacheKey)) {
+            if (!$data = $this->cacheClient->get($cacheKey)) {
+
                 $response = $this->httpClient->sendRequest($endpoint, $options);
+                if ($response) {
+                    $data = $this->parser->parse($response->getBody()->getContents());
+                }
 
                 // @todo figure out which endpoints should be cached with expiration.
-                $this->cacheClient->set($cacheKey, $response);
+                $this->cacheClient->set($cacheKey, json_encode($data));
+            }
+            else {
+              $data = json_decode($data);
             }
         }
         else {
             $response = $this->httpClient->sendRequest($endpoint, $options);
+            if ($response) {
+                $data = $this->parser->parse($response->getBody()->getContents());
+            }
         }
 
-        if ($response) {
-            return $this->parser->parse($response->getBody()->getContents());
-        }
-
-        return FALSE;
+        return $data;
     }
 
     abstract public function suggestId($string);
