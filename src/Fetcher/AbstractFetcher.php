@@ -19,7 +19,7 @@ abstract class AbstractFetcher
         $this->parser = $parser;
         $this->httpClient = $clientFactory->createClient();
 
-        $this->cacheClient = $cacheClientFactory->create();
+        $this->cacheClient = $cacheClientFactory ? $cacheClientFactory->create() : null;
         $this->cacheConfig = $cacheConfig;
     }
 
