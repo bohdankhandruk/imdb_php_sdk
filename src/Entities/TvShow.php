@@ -8,16 +8,16 @@ use Imdb\Fetcher\BaseFetcher;
  * Class TvShow
  * @package Imdb\Entities
  *
- * @method \Imdb\Entities\TvShow getId()
- * @method \Imdb\Entities\TvShow getNextEpisode()
- * @method \Imdb\Entities\TvShow getNumberOfEpisodes()
- * @method \Imdb\Entities\TvShow getImage()
- * @method \Imdb\Entities\TvShow getRunningTimeInMinutes()
- * @method \Imdb\Entities\TvShow getSeriesEndYear()
- * @method \Imdb\Entities\TvShow getSeriesStartYear()
- * @method \Imdb\Entities\TvShow getTitle()
- * @method \Imdb\Entities\TvShow getTitleType()
- * @method \Imdb\Entities\TvShow getYear()
+ * @method \Imdb\Entities\TvShow getId($expired = NULL)
+ * @method \Imdb\Entities\TvShow getNextEpisode($expired = NULL)
+ * @method \Imdb\Entities\TvShow getNumberOfEpisodes($expired = NULL)
+ * @method \Imdb\Entities\TvShow getImage($expired = NULL)
+ * @method \Imdb\Entities\TvShow getRunningTimeInMinutes($expired = NULL)
+ * @method \Imdb\Entities\TvShow getSeriesEndYear($expired = NULL)
+ * @method \Imdb\Entities\TvShow getSeriesStartYear($expired = NULL)
+ * @method \Imdb\Entities\TvShow getTitle($expired = NULL)
+ * @method \Imdb\Entities\TvShow getTitleType($expired = NULL)
+ * @method \Imdb\Entities\TvShow getYear($expired = NULL)
  */
 class TvShow extends CultureItem
 {

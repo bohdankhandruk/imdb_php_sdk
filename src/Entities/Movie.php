@@ -8,12 +8,12 @@ use Imdb\Fetcher\BaseFetcher;
  * Class Movie
  * @package Imdb\Entities
  *
- * @method \Imdb\Entities\Movie getId()
- * @method \Imdb\Entities\Movie getTitle()
- * @method \Imdb\Entities\Movie getYear()
- * @method \Imdb\Entities\Movie getImage()
- * @method \Imdb\Entities\Movie getRunningTimeInMinutes()
- * @method \Imdb\Entities\Movie getPrincipals()
+ * @method \Imdb\Entities\Movie getId($expired = NULL)
+ * @method \Imdb\Entities\Movie getTitle($expired = NULL)
+ * @method \Imdb\Entities\Movie getYear($expired = NULL)
+ * @method \Imdb\Entities\Movie getImage($expired = NULL)
+ * @method \Imdb\Entities\Movie getRunningTimeInMinutes($expired = NULL)
+ * @method \Imdb\Entities\Movie getPrincipals($expired = NULL)
  */
 class Movie extends CultureItem
 {

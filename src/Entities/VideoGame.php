@@ -8,11 +8,11 @@ use Imdb\Fetcher\BaseFetcher;
  * Class Episode
  * @package Imdb\Entities
  *
- * @method \Imdb\Entities\VideoGame getId()
- * @method \Imdb\Entities\VideoGame getImage()
- * @method \Imdb\Entities\VideoGame getTitle()
- * @method \Imdb\Entities\VideoGame getTitleType()
- * @method \Imdb\Entities\VideoGame getYear()
+ * @method \Imdb\Entities\VideoGame getId($expired = NULL)
+ * @method \Imdb\Entities\VideoGame getImage($expired = NULL)
+ * @method \Imdb\Entities\VideoGame getTitle($expired = NULL)
+ * @method \Imdb\Entities\VideoGame getTitleType($expired = NULL)
+ * @method \Imdb\Entities\VideoGame getYear($expired = NULL)
  */
 class VideoGame extends CultureItem
 {

@@ -43,7 +43,7 @@ abstract class AbstractFetcher
                 }
 
                 if (isset($expired)) {
-                  $this->cacheClient->setWithExpiration($cacheKey, json_encode($data), $expired);
+                  $this->cacheClient->setWithExpiration($cacheKey, $expired, json_encode($data));
                 }
                 else {
                   $this->cacheClient->set($cacheKey, json_encode($data));

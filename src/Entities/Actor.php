@@ -8,29 +8,29 @@ use Imdb\Fetcher\BaseFetcher;
  * Class Actor
  * @package Imdb\Entities
  *
- * @method \Imdb\Entities\Actor getId()
- * @method \Imdb\Entities\Actor getAkas()
- * @method \Imdb\Entities\Actor getImage()
- * @method \Imdb\Entities\Actor getName()
- * @method \Imdb\Entities\Actor getBirthDate()
- * @method \Imdb\Entities\Actor getBirthPlace()
- * @method \Imdb\Entities\Actor getGender()
- * @method \Imdb\Entities\Actor getHeightCentimeters()
- * @method \Imdb\Entities\Actor getNicknames()
- * @method \Imdb\Entities\Actor getRealName()
- * @method \Imdb\Entities\Actor getSpouses()
- * @method \Imdb\Entities\Actor getTrademarks()
- * @method \Imdb\Entities\Actor getMiniBios()
- * @method \Imdb\Entities\Actor getInterestingJobs(array $options = [])
- * @method \Imdb\Entities\Actor getAllImages(array $options = [])
- * @method \Imdb\Entities\Actor getAllNews(array $options = [])
- * @method \Imdb\Entities\Actor getAwards(array $options = [])
- * @method \Imdb\Entities\Actor getKnownFor(array $options = [])
- * @method \Imdb\Entities\Actor getAllFilmography(array $options = [])
- * @method \Imdb\Entities\Actor getAllVideos(array $options = [])
- * @method \Imdb\Entities\Actor getAwardsSummary(array $options = [])
- * @method static \Imdb\Entities\Actor listMostPopularCelebs(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [])
- * @method static \Imdb\Entities\Actor listBornToday(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [])
+ * @method \Imdb\Entities\Actor getId($expired = NULL)
+ * @method \Imdb\Entities\Actor getAkas($expired = NULL)
+ * @method \Imdb\Entities\Actor getImage($expired = NULL)
+ * @method \Imdb\Entities\Actor getName($expired = NULL)
+ * @method \Imdb\Entities\Actor getBirthDate($expired = NULL)
+ * @method \Imdb\Entities\Actor getBirthPlace($expired = NULL)
+ * @method \Imdb\Entities\Actor getGender($expired = NULL)
+ * @method \Imdb\Entities\Actor getHeightCentimeters($expired = NULL)
+ * @method \Imdb\Entities\Actor getNicknames($expired = NULL)
+ * @method \Imdb\Entities\Actor getRealName($expired = NULL)
+ * @method \Imdb\Entities\Actor getSpouses($expired = NULL)
+ * @method \Imdb\Entities\Actor getTrademarks($expired = NULL)
+ * @method \Imdb\Entities\Actor getMiniBios($expired = NULL)
+ * @method \Imdb\Entities\Actor getInterestingJobs(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAllImages(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAllNews(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAwards(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getKnownFor(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAllFilmography(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAllVideos(array $options = [], $expired = NULL)
+ * @method \Imdb\Entities\Actor getAwardsSummary(array $options = [], $expired = NULL)
+ * @method static \Imdb\Entities\Actor listMostPopularCelebs(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
+ * @method static \Imdb\Entities\Actor listBornToday(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
  */
 class Actor extends ImdbItem
 {
@@ -60,9 +60,18 @@ class Actor extends ImdbItem
             return '-' . strtolower($matches[0]);
         }, $name);
 
-        $options = $arguments ? reset($arguments) : [];
+        $options = [];
+        switch (count($arguments)) {
+          case 1:
+            $expired = reset($arguments);
+            break;
+          case 2:
+            $options = reset($arguments);
+            $expired = $arguments[1];
+            break;
+        }
 
-        return $this->fetcher->fetch($endpoint, $this->getOptions($options));
+        return $this->fetcher->fetch($endpoint, $this->getOptions($options), $expired);
     }
 
     public static function __callStatic($name, $arguments)
@@ -71,9 +80,9 @@ class Actor extends ImdbItem
                 return '-' . strtolower($matches[0]);
             }, $name);
 
-        list($fetcher, $options) = $arguments;
+        list($fetcher, $options, $expired) = $arguments;
 
-        return $fetcher->fetch($endpoint, $options);
+        return $fetcher->fetch($endpoint, $options, $expired);
     }
 
     public function getOptions($options) {
