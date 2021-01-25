@@ -23,7 +23,7 @@ abstract class AbstractFetcher
         $this->cacheConfig = $cacheConfig;
     }
 
-    public function fetch($endpoint, $options)
+    public function fetch($endpoint, $options, $expired = NULL)
     {
         $data = FALSE;
 
@@ -42,8 +42,12 @@ abstract class AbstractFetcher
                     $data = $this->parser->parse($response->getBody()->getContents());
                 }
 
-                // @todo figure out which endpoints should be cached with expiration.
-                $this->cacheClient->set($cacheKey, json_encode($data));
+                if (isset($expired)) {
+                  $this->cacheClient->setWithExpiration($cacheKey, json_encode($data), $expired);
+                }
+                else {
+                  $this->cacheClient->set($cacheKey, json_encode($data));
+                }
             }
             else {
               $data = json_decode($data);
