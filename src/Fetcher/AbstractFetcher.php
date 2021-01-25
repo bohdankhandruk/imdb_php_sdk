@@ -42,6 +42,8 @@ abstract class AbstractFetcher
                     $data = $this->parser->parse($response->getBody()->getContents());
                 }
 
+                // @todo exclude methods that do not required API call.
+                // @todo expired arg doesn't take any effect if there is already a cache entry.
                 if (isset($expired)) {
                   $this->cacheClient->setWithExpiration($cacheKey, $expired, json_encode($data));
                 }
