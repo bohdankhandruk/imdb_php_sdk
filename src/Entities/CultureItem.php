@@ -78,6 +78,8 @@ abstract class CultureItem extends ImdbItem
                 $options = reset($arguments);
                 $expired = $arguments[1];
                 break;
+            default:
+                $expired = NULL;
         }
 
         return $this->fetcher->fetch($endpoint, $this->getOptions($options), $expired);
