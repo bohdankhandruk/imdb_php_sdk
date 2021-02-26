@@ -37,16 +37,16 @@ namespace Imdb\Entities;
  * @method \Imdb\Entities\CultureItem getOverviewDetails(array $options = [], $expired = NULL)
  * @method \Imdb\Entities\CultureItem getTopCast(array $options = [], $expired = NULL)
  * @method \Imdb\Entities\CultureItem getTopStripe(array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getTopRatedTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getBestPictureWinners(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getMostPopularTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem listPopularGenres(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getTopRatedMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getComingSoonMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getComingSoonTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getMostPopularMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getPopularMoviesByGenre(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\CultureItem getVideoPlayback(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
+ * @method static \Imdb\Entities\CultureItem getTopRatedTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getBestPictureWinners(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getMostPopularTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem listPopularGenres(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getTopRatedMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getComingSoonMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getComingSoonTvShows(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getMostPopularMovies(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getPopularMoviesByGenre(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\CultureItem getVideoPlayback(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
  */
 abstract class CultureItem extends ImdbItem
 {
@@ -91,9 +91,9 @@ abstract class CultureItem extends ImdbItem
                 return '-' . strtolower($matches[0]);
             }, $name);
 
-        list($fetcher, $options, $expired) = $arguments;
+        list($fetcher, $options, $expired, $stale) = $arguments;
 
-        return $fetcher->fetch($endpoint, $options, $expired);
+        return $fetcher->fetch($endpoint, $options, $expired, $stale);
     }
 
     public function getOptions($options) {

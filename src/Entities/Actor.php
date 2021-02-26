@@ -29,8 +29,8 @@ use Imdb\Fetcher\BaseFetcher;
  * @method \Imdb\Entities\Actor getAllFilmography(array $options = [], $expired = NULL)
  * @method \Imdb\Entities\Actor getAllVideos(array $options = [], $expired = NULL)
  * @method \Imdb\Entities\Actor getAwardsSummary(array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\Actor listMostPopularCelebs(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
- * @method static \Imdb\Entities\Actor listBornToday(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL)
+ * @method static \Imdb\Entities\Actor listMostPopularCelebs(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
+ * @method static \Imdb\Entities\Actor listBornToday(\Imdb\Fetcher\AbstractFetcher $fetcher, array $options = [], $expired = NULL, $stale = FALSE)
  */
 class Actor extends ImdbItem
 {
@@ -82,9 +82,9 @@ class Actor extends ImdbItem
                 return '-' . strtolower($matches[0]);
             }, $name);
 
-        list($fetcher, $options, $expired) = $arguments;
+        list($fetcher, $options, $expired, $stale) = $arguments;
 
-        return $fetcher->fetch($endpoint, $options, $expired);
+        return $fetcher->fetch($endpoint, $options, $expired, $stale);
     }
 
     public function getOptions($options) {

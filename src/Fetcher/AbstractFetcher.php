@@ -23,7 +23,7 @@ abstract class AbstractFetcher
         $this->cacheConfig = $cacheConfig;
     }
 
-    public function fetch($endpoint, $options, $expired = NULL)
+    public function fetch($endpoint, $options, $expired = NULL, $stale = FALSE)
     {
         $data = FALSE;
 
@@ -52,6 +52,9 @@ abstract class AbstractFetcher
                 }
             }
             else {
+              if ($stale && $expired) {
+                $this->cacheClient->expire($cacheKey, $expired);
+              }
               $data = json_decode($data);
             }
         }
