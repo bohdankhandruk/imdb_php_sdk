@@ -35,6 +35,11 @@ class PhpRedisClient implements CacheClientInterface
         return $this->client->setex($key, $time, $value);
     }
 
+    public function expire($key, $time)
+    {
+        return $this->client->expire($key, $time);
+    }
+
     public function delete($key)
     {
         return $this->client->del($key);

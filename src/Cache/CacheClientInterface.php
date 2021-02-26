@@ -9,6 +9,7 @@ interface CacheClientInterface
     public function getMultiple($keys);
     public function set($key, $value);
     public function setWithExpiration($key, $time, $value);
+    public function expire($key, $time);
     public function delete($key);
     public function exists($key);
     public function close();
