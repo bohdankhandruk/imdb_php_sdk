@@ -11,8 +11,10 @@ class BaseFetcher extends AbstractFetcher
 
         $index = 0;
         foreach ($data->results as $key => $result) {
+            // @todo pass the enity type and compare with 'titleType'.
             if ($result->title == $string) {
                 $index = $key;
+                break;
             }
         }
 
